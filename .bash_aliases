@@ -13,6 +13,9 @@ alias psg='ps -e | grep -i'
 alias cls='clear'
 alias vi='vim'
 
+# Trash Alias
+alias rm='echo "This is not the command you are looking for."; false'
+
 # application aliases
-alias streamlink='~/myenv/bin/streamlink'
-alias ytdlp='~/ytdlp/bin/yt-dlp'
+alias streamlink='~/.virtualenvs/strmlnk/bin/streamlink'
+alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
