@@ -1,0 +1,26 @@
+## Players
+# mpv
+player=mpv
+player-args=--cache=yes --demuxer-max-bytes=2M
+#player=mpv --cache=yes --cache-pause-wait=2 --demuxer-max-bytes=8192
+
+## Options
+# Set Player Title
+title="{title} : {author} : {game}"
+# Select Default Stream
+default-stream=720p,720p60,best
+# Don't Close Player
+player-no-close
+# "Prefetch"
+ringbuffer-size=32M
+# Multithreaded stream download
+stream-segment-threads=2
+# Low latency hls
+hls-segment-stream-data
+hls-live-edge=2
+## Twitch Options
+twitch-low-latency
+twitch-disable-ads
+# Don't open hosted streams
+twitch-disable-hosting
+twitch-disable-reruns
