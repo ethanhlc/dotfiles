@@ -1,7 +1,8 @@
 ## youtube-dlp config file
 # bypass youtube throttling
 --format=b
---format-sort="res:720"
+--format-sort="res:1080"
+#--format-sort="res:720"
 --paths=~/Videos/
 --output="%(title)s : %(uploader)s (%(upload_date>%y%m%d)s).%(ext)s"
 --download-archive="~/Videos/.ytdlarchive"
