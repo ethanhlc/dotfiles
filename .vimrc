@@ -40,7 +40,7 @@ set nobackup
 packadd! dracula
 
 " Enable Dracula color scheme
-colorscheme dracula
+"colorscheme dracula
 
 " Turn syntax highlighting on.
 syntax enable

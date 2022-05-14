@@ -17,5 +17,9 @@ alias vi='vim'
 alias rm='echo "This is not the command you are looking for."; false'
 
 # application aliases
-alias streamlink='~/.virtualenvs/strmlnk/bin/streamlink'
-alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
+#alias streamlink='~/.virtualenvs/strmlnk/bin/streamlink'
+#alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
+alias ytdlp='yt-dlp'
+
+# wttr.in weather
+alias wttr='curl wttr.in/Bundang-gu?nqF'
