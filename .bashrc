@@ -1,7 +1,7 @@
 # ~/.bashrc
 # Executed for non-login shells.
 # Created by: Ethan Baik
-# Date: 2022.04.12
+# Date: 2022.05.15
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -15,7 +15,18 @@ then
 fi
 export PATH
 
-# command history options
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -x "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+
+unset rc
+
+# Command History Options
 # ignore duplicate lines & lines starting with space
 HISTCONTROL=ignoreboth:erasedups
 
@@ -25,16 +36,7 @@ HISTFILESIZE=2000
 # append to history rather than overwrite
 shopt -s histappend
 
-# Source external alias & functions files
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-fi
-
-# modify tab-completion behavior
+# Tab-Completion Behavior
 # first TAB shows all matching, subsequent TAB cycles
 bind 'TAB:menu-complete'
 bind 'set show-all-if-ambiguous on'
