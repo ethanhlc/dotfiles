@@ -37,7 +37,7 @@ set nobackup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " add dracula
-packadd! dracula
+"packadd! dracula
 
 " Enable Dracula color scheme
 "colorscheme dracula

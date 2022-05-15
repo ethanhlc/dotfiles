@@ -1,25 +1,43 @@
-# system aliases
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias ll='ls -laFh'
+# ~/.bash_aliases
+# bash aliases file
+# Created by: Ethan Baik
+# Date: 2022.04.12
+
+# enable color support of ls & grep
+#if [ -x /usr/bin/dircolors ]; then
+#    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b_)"
+#    alias ls='ls -F --color=auto'
+#    #alias dir='dir --color=auto'
+#    #alias vdir='vdir --color=auto'
+#
+#    alias grep='grep --color=auto'
+#    alias fgrep='fgrep --color=auto'
+#    alias egrep='egrep --color=auto'
+#fi
+
+# ls
+alias ll='ls -lahF'
 alias la='ls -AF'
 alias l='ls -CF'
 
-alias h='history 100'   #give only recent
+alias h='history 100'   # show only recent history
 alias gh='history | grep -i'
 
-# search process list
 alias psg='ps -e | grep -i'
 
 alias cls='clear'
-alias vi='vim'
+
+# Dotfiles git alias
+alias dtf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Trash Alias
-alias rm='echo "This is not the command you are looking for."; false'
+alias rm='echo "Use the trash command instead."; false'
 
-# application aliases
-#alias streamlink='~/.virtualenvs/strmlnk/bin/streamlink'
-#alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
+# Application Aliases
 alias ytdlp='yt-dlp'
+## Python Virtual Env Application Aliases
+#alias streamlink='~/.virtualenvs/strmlnk/bin/streamlnk'
+#alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
 
-# wttr.in weather
+# Weather from wttr.in
 alias wttr='curl wttr.in/Bundang-gu?nqF'
