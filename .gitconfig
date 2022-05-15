@@ -1,0 +1,13 @@
+[user]
+	name = Ethan Baik
+	email = sakithree@gmail.com
+[core]
+	editor = vim
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	sw = switch
+	up = rebase
+	hist = log --pretty=format:'%h - %ad | %an : %s' --graph --date=short
