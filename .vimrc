@@ -36,11 +36,11 @@ set nobackup
 " User Interface & Behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" add dracula
-"packadd! dracula
+" add theme pack
+"packadd! theme
 
-" Enable Dracula color scheme
-"colorscheme dracula
+" Enable color scheme
+"colorscheme theme
 
 " Turn syntax highlighting on.
 syntax enable
@@ -51,8 +51,11 @@ set ruler
 " Add numbers to each line on the left-hand side.
 set number
 
+" Enable listchars
+set list
+
 " Set listchars
-set listchars=trail:·
+set listchars=tab:»·,trail:·
 
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
