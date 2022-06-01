@@ -26,6 +26,9 @@ fi
 
 unset rc
 
+# PS1 Prompt
+PS1="\[\033[01;32m\]\u@\h \[\033[01;35m\]\w\[\033[00m\]\$ "
+
 # Command History Options
 # ignore duplicate lines & lines starting with space
 HISTCONTROL=ignoreboth:erasedups
