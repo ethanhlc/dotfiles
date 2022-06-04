@@ -24,6 +24,7 @@
 alias ls='exa -F'
 alias la='exa -aF'
 alias ll='exa -lhaF'
+alias llg='exa -lhaF --git'
 
 alias h='history 100'   # show only recent history
 
@@ -38,11 +39,12 @@ alias dtf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # Trash Alias
 alias rm='echo "Use the trash command instead."; false'
 
+# Interactive Move/Copy
+alias mv='mv -i'
+alias cp='cp -i'
+
 # Application Aliases
 alias ytdlp='yt-dlp'
-## Python Virtual Env Application Aliases
-#alias streamlink='~/.virtualenvs/strmlnk/bin/streamlnk'
-#alias ytdlp='~/.virtualenvs/ytdlp/bin/yt-dlp'
 
 # Weather from wttr.in
 alias wttr='curl wttr.in/Bundang-gu?nqF'
