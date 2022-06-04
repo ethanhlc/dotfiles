@@ -4,8 +4,14 @@
 #player-args=--cache=yes --demuxer-max-bytes=2M
 #player=mpv --cache=yes --cache-pause-wait=2 --demuxer-max-bytes=8192
 
+# celluloid
+player=celluloid
+player-http
+
 # vlc
-player=vlc --file-caching=5000
+#player=vlc --file-caching=5000
+#player=flatpak run org.videolan.VLC --file-caching=5000
+
 
 ## Options
 # Set Player Title
