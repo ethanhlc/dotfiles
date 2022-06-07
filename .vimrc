@@ -48,8 +48,8 @@ syntax enable
 " Always show current position
 set ruler
 
-" Add numbers to each line on the left-hand side.
-set number
+" Add numbers to each line and show relative numbers.
+set number relativenumber
 
 " Enable listchars
 set list
@@ -174,6 +174,13 @@ inoremap <C-U> <C-G>u<C-U>
 
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
+
+" Automatic toggling between line number modes
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter   * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave     * if &nu                  | set nornu | endif
+augroup END
 
 " This will enable code folding.
 " Use the marker method of folding.
