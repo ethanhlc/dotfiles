@@ -23,8 +23,7 @@
 # exa replacement for ls
 alias ls='exa -F'
 alias la='exa -aF'
-alias ll='exa -lhaF'
-alias llg='exa -lhaF --git'
+alias ll='exa -lhaF --git'
 
 alias h='history 100'   # show only recent history
 
