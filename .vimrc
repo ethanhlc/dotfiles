@@ -217,7 +217,7 @@ augroup END
 " Put these in an autocmd group, so that you can revert them with:
 " ':augroup vimStartup | au! | augroup END'
 augroup cursor_pos
-    au!
+    autocmd!
     autocmd BufReadPost *
         \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
         \ |   exe "normal! g`\""
@@ -278,28 +278,50 @@ set showmode
 " Show the status on the second to last line.
 set laststatus=2
 
+" Build statusline
+set statusline=             " clear statusline
+"set statusline+=%#Search#   " highlight
+"set statusline+=%{StatuslineGit()} " git branch (broken)
+"set statusline+=%#StatusLine#   " highlight
+set statusline+=\ %F        " filename (fullpath)
+set statusline+=\ %m%r%h    " Modified/ReadOnly/Help
+set statusline+=\ %Y        " filetype
+set statusline+=%=          " left/right divider
+set statusline+=%{&fileformat}
+set statusline+=\|%{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ %#StatusLineNC#  " highlight
+set statusline+=Line:%l     " line number
+set statusline+=\ Col:%c    " column number
+set statusline+=\ %p%%      " % of document
+
 " Clear status line when vimrc is reloaded.
 "set statusline=
-
 " Status line left side.
 "set statusline+=\ %F\ %M\ %Y\ %R
-
 " Add a divider.
 "set statusline+=%=
-
 " Status line right side.
 "set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
 
-" Set Status line
-set statusline=\ %{HasPaste()}%F\ %m%r%h\ %Y%=Line:%l\ Col:%c\ %p%%
+" Set Status line (old/oneline)
+"set statusline=\ %{HasPaste()}%F\ %m%r%h\ %Y%=Line:%l\ Col:%c\ %p%%
 
-" Status line helper function
+" Status line helper functions
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
         return 'PASTE MODE  '
     endif
     return ''
+endfunction
+
+function! GitBranch()
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+"
+function! StatuslineGit()
+    let l:branchname = GitBranch()
+    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
 " }}}
