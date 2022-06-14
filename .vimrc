@@ -37,10 +37,10 @@ set nobackup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " add theme pack
-"packadd! theme
+packadd! dracula
 
 " Enable color scheme
-"colorscheme theme
+colorscheme nord
 
 " Turn syntax highlighting on.
 syntax enable
@@ -131,6 +131,30 @@ set autoindent
 " PLUGINS ---------------------------------------------------------------- {{{
 
 " Plugin code goes here.
+" gitgitter config
+set updatetime=100      " reduce time until gitgutter is updated
+
+" lightline statusline config
+let g:lightline = {
+    \ 'colorscheme': 'seoul256',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'absolutepath', 'readonly', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'filetype', 'fileencoding', 'fileformat' ] ]
+    \ },
+    \ 'component': {
+    \   'modified': '%m'
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
+    \ 'separator': {
+    \   'left': '', 'right': ''
+    \ },
+    \}
+
 
 " }}}
 
@@ -285,26 +309,26 @@ endif
 set showcmd
 
 " Show the mode you are on the last line.
-set showmode
+set noshowmode
 
 " Show the status on the second to last line.
 set laststatus=2
 
 " Build statusline
-set statusline=             " clear statusline
+"set statusline=             " clear statusline
 "set statusline+=%#Search#   " highlight
 "set statusline+=%{StatuslineGit()} " git branch (broken)
 "set statusline+=%#StatusLine#   " highlight
-set statusline+=\ %F        " filename (fullpath)
-set statusline+=\ %m%r%h    " Modified/ReadOnly/Help
-set statusline+=\ %Y        " filetype
-set statusline+=%=          " left/right divider
-set statusline+=%{&fileformat}
-set statusline+=\|%{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ %#StatusLineNC#  " highlight
-set statusline+=Line:%l     " line number
-set statusline+=\ Col:%c    " column number
-set statusline+=\ %p%%      " % of document
+"set statusline+=\ %F        " filename (fullpath)
+"set statusline+=\ %m%r%h    " Modified/ReadOnly/Help
+"set statusline+=\ %Y        " filetype
+"set statusline+=%=          " left/right divider
+"set statusline+=%{&fileformat}
+"set statusline+=\|%{&fileencoding?&fileencoding:&encoding}
+"set statusline+=\ %#StatusLineNC#  " highlight
+"set statusline+=Line:%l     " line number
+"set statusline+=\ Col:%c    " column number
+"set statusline+=\ %p%%      " % of document
 
 " Clear status line when vimrc is reloaded.
 "set statusline=
@@ -320,21 +344,21 @@ set statusline+=\ %p%%      " % of document
 
 " Status line helper functions
 " Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-
-function! GitBranch()
-    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
+"function! HasPaste()
+"    if &paste
+"        return 'PASTE MODE  '
+"    endif
+"    return ''
+"endfunction
+"
+"function! GitBranch()
+"    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"endfunction
 "
-function! StatuslineGit()
-    let l:branchname = GitBranch()
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+"function! StatuslineGit()
+"    let l:branchname = GitBranch()
+"    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+"endfunction
 
 " }}}
 
