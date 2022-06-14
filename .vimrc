@@ -1,16 +1,9 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" My vimrc file
-"
-" Created using various online sources
-"
-" Creator: Ethan
-" Date: 2022.01.12
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ~/.vimrc
+" vimrc file created using various online sources
+" Created by: Ethan
+" Date: 2022.06.15
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General ---------------------------------------------------------------- {{{
 
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
@@ -31,13 +24,13 @@ set autoread
 " don't keep backup file (files end in ~)
 set nobackup
 
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" User Interface & Behavior
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" User Interface & Behavior ---------------------------------------------- {{{
 
 " add theme pack
-packadd! dracula
+"packadd! dracula
 
 " Enable color scheme
 colorscheme nord
@@ -105,10 +98,10 @@ if has('mouse')
     set mouse=a
 endif
 
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Text, Tab, Indent
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Text, Tab, Indent ------------------------------------------------------ {{{
 
 " Use spaces instead of tabs.
 set expandtab
@@ -126,6 +119,8 @@ set shiftwidth=4
 
 " Auto indent
 set autoindent
+
+" }}}
 
 
 " PLUGINS ---------------------------------------------------------------- {{{
