@@ -144,12 +144,20 @@ set autoindent
 " Remap 0 to first NON-BLANK character.
 nnoremap 0 ^
 
+" Mappings (Learn Vim Scripting the Hard Way)
+" convert current word to upper case
+inoremap <c-u> <esc>viwU
+
+" map 'jk' to exit insert mode
+inoremap jk <esc>
+
+" Open vimrc in a vertical split
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " Disable highlight when <leader>\ is pressed. (\\)
 nnoremap <silent> <leader>\ :nohlsearch<cr>
-
-" Visual mode search: * or # (backward) search selection.
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " You can split the window in Vim by typing :split or :vsplit.
 " Navigate the split view easier by pressing CTRL+j, CTRL+k, CTRL+h, or CTRL+l.
@@ -165,10 +173,14 @@ noremap <c-down> <c-w>-
 noremap <c-left> <c-w>>
 noremap <c-right> <c-w><
 
+" Visual mode search: * or # (backward) search selection.
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 " Revert with ":iunmap <C-U>".
-inoremap <C-U> <C-G>u<C-U>
+"inoremap <C-U> <C-G>u<C-U>
 
 " }}}
 
