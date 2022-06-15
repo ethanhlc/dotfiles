@@ -62,6 +62,9 @@ set scrolloff=10
 " Wrap lines
 set wrap
 
+" Allow arrow keys to travel past eol
+set whichwrap+=<,>,[,]
+
 " Highlight search results
 set hlsearch
 
@@ -128,28 +131,6 @@ set autoindent
 " Plugin code goes here.
 " gitgitter config
 set updatetime=100      " reduce time until gitgutter is updated
-
-" lightline statusline config
-let g:lightline = {
-    \ 'colorscheme': 'seoul256',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'absolutepath', 'readonly', 'modified' ] ],
-    \   'right': [ [ 'lineinfo' ],
-    \              [ 'percent' ],
-    \              [ 'filetype', 'fileencoding', 'fileformat' ] ]
-    \ },
-    \ 'component': {
-    \   'modified': '%m'
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead'
-    \ },
-    \ 'separator': {
-    \   'left': '', 'right': ''
-    \ },
-    \}
-
 
 " }}}
 
@@ -303,57 +284,63 @@ endif
 " Show partial command you type in the last line of the screen.
 set showcmd
 
-" Show the mode you are on the last line.
+" Show the mode you are on the last line. noshomode for lightline
 set noshowmode
 
 " Show the status on the second to last line.
 set laststatus=2
 
-" Build statusline
-"set statusline=             " clear statusline
-"set statusline+=%#Search#   " highlight
-"set statusline+=%{StatuslineGit()} " git branch (broken)
-"set statusline+=%#StatusLine#   " highlight
-"set statusline+=\ %F        " filename (fullpath)
-"set statusline+=\ %m%r%h    " Modified/ReadOnly/Help
-"set statusline+=\ %Y        " filetype
-"set statusline+=%=          " left/right divider
-"set statusline+=%{&fileformat}
-"set statusline+=\|%{&fileencoding?&fileencoding:&encoding}
-"set statusline+=\ %#StatusLineNC#  " highlight
-"set statusline+=Line:%l     " line number
-"set statusline+=\ Col:%c    " column number
-"set statusline+=\ %p%%      " % of document
+" lightline statusline config
+let g:lightline = {
+    \ 'colorscheme': 'seoul256',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'absolutepath', 'readonly', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'filetype', 'fileencoding', 'fileformat' ] ]
+    \ },
+    \ 'component': {
+    \   'modified': '%m'
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
+    \ 'separator': {
+    \   'left': '', 'right': ''
+    \ },
+    \}
 
-" Clear status line when vimrc is reloaded.
-"set statusline=
-" Status line left side.
-"set statusline+=\ %F\ %M\ %Y\ %R
-" Add a divider.
-"set statusline+=%=
-" Status line right side.
-"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+" Build statusline
+"set statusline=                             " clear statusline
+"set statusline+=%#Search#                   " highlight
+"set statusline+=%{StatuslineGit()}          " git branch (broken)
+"set statusline+=\ %{&paste?'PASTE\ ':''}    " paste mode
+"set statusline+=%#StatusLine#               " highlight
+"set statusline+=%F                          " filename (fullpath)
+"set statusline+=\ %m%r%h                    " Modified/ReadOnly/Help
+"set statusline+=\ %Y                        " filetype
+"set statusline+=%=                          " left/right divider
+"set statusline+=%{&fileformat}              " fileformat (dos/unix)
+"set statusline+=\ %{&fenc?&fenc:&enc}       " fenc=fileencoding, enc=encoding
+"set statusline+=\ %#StatusLineNC#           " highlight
+"set statusline+=\ Line:%l                   " line number
+"set statusline+=\ Col:%c                    " column number
+"set statusline+=\ %p%%                      " % of document
 
 " Set Status line (old/oneline)
 "set statusline=\ %{HasPaste()}%F\ %m%r%h\ %Y%=Line:%l\ Col:%c\ %p%%
 
 " Status line helper functions
-" Returns true if paste mode is enabled
-"function! HasPaste()
-"    if &paste
-"        return 'PASTE MODE  '
-"    endif
-"    return ''
-"endfunction
-"
 "function! GitBranch()
 "    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 "endfunction
-"
+
 "function! StatuslineGit()
 "    let l:branchname = GitBranch()
 "    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 "endfunction
+"
 
 " }}}
 
