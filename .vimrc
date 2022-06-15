@@ -295,21 +295,43 @@ let g:lightline = {
     \ 'colorscheme': 'seoul256',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'absolutepath', 'readonly', 'modified' ] ],
+    \             [ 'gitbranch', 'absolutepath' ],
+    \             [ 'readonly', 'modified' ] ],
     \   'right': [ [ 'lineinfo' ],
     \              [ 'percent' ],
     \              [ 'filetype', 'fileencoding', 'fileformat' ] ]
     \ },
     \ 'component': {
-    \   'modified': '%m'
+    \   'modified': '%m',
+    \   'gitbranch': '%{b:gitbr}'
     \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead'
+    \ 'component_visible_condition': {
+    \   'gitbranch': 'strlen(b:gitbr)'
     \ },
     \ 'separator': {
     \   'left': '', 'right': ''
     \ },
+    \ 'subseparator': {
+    \   'left': '|', 'right': '|'
+    \ },
     \}
+
+" Lightline helper functions
+" Run FugitiveHead on buffer enter/read/write, add  to branch name
+augroup branchname
+    autocmd!
+    autocmd BufEnter,BufRead,BufWritePost * let b:gitbr = strlen(FugitiveHead(7)) ? ' '.FugitiveHead(7) : ''
+augroup END
+
+" unused function (same as augroup branchname)
+"function! GitFug()
+"    if strlen(FugitiveHead())
+"        return ' ' . FugitiveHead()
+"    else
+"        return FugitiveHead()
+"    endif
+"endfunction
+
 
 " Build statusline
 "set statusline=                             " clear statusline
