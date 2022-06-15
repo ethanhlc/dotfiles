@@ -3,6 +3,7 @@
 	email = sakithree@gmail.com
 [core]
 	editor = vim
+	excludesFile = /home/ethan/.gitignore
 [alias]
 	st = status
 	co = checkout
