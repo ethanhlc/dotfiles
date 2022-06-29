@@ -6,7 +6,7 @@
 # Command History Options
 # ignore duplicate lines & lines starting with space
 HISTCONTROL=ignoreboth:erasedups
-HISTIGNORE="ls:ll:cd ..:cd ~:pwd:clear:exit:h:history"
+HISTIGNORE="ls:ll:cd ~:cd ..:cd -:pwd:clear:exit:h:history:vim"
 
 HISTSIZE=1000
 HISTFILESIZE=2000
