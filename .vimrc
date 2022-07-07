@@ -320,7 +320,8 @@ let g:lightline = {
 " Run FugitiveHead on buffer enter/read/write, add  to branch name
 augroup branchname
     autocmd!
-    autocmd BufEnter,BufRead,BufWritePost * let b:gitbr = strlen(FugitiveHead(7)) ? ' '.FugitiveHead(7) : ''
+    autocmd BufEnter,BufRead,BufWritePost * 
+        \ let b:gitbr = strlen(FugitiveHead(7)) ? ' '.FugitiveHead(7) : ''
 augroup END
 
 " unused function (same as augroup branchname)
@@ -332,25 +333,38 @@ augroup END
 "    endif
 "endfunction
 
+"call lightline#disable()        " disable lightline
 
 " Build statusline
-"set statusline=                             " clear statusline
-"set statusline+=%#Search#                   " highlight
-"set statusline+=%{StatuslineGit()}          " git branch (broken)
-"set statusline+=\ %{&paste?'PASTE\ ':''}    " paste mode
-"set statusline+=%#StatusLine#               " highlight
-"set statusline+=%F                          " filename (fullpath)
-"set statusline+=\ %m%r%h                    " Modified/ReadOnly/Help
-"set statusline+=\ %Y                        " filetype
-"set statusline+=%=                          " left/right divider
-"set statusline+=%{&fileformat}              " fileformat (dos/unix)
-"set statusline+=\ %{&fenc?&fenc:&enc}       " fenc=fileencoding, enc=encoding
-"set statusline+=\ %#StatusLineNC#           " highlight
-"set statusline+=\ Line:%l                   " line number
-"set statusline+=\ Col:%c                    " column number
-"set statusline+=\ %p%%                      " % of document
+"set statusline=                                         " clear statusline
+"set statusline+=%#Left1#                                " highlight L1
+"set statusline+=\ %{toupper(g:currentmode[mode()])}     " show mode
+"set statusline+=%{&paste?'PASTE\ ':''}                  " paste mode
+"set statusline+=%#LArrow1#                              " arrow L1
+"set statusline+=                                       " arrow left
+"set statusline+=%#Left2#                                " highlight L2
+"set statusline+=\ %{b:gitstl}                           " git branch
+"set statusline+=%F\                                     " filename (fullpath)
+"set statusline+=%#LArrow2#                              " arrow L2
+"set statusline+=                                       " arrow left
+"set statusline+=%#Center1#                              " highlight center
+"set statusline+=\ %r%m                                  " ReadOnly/Modified
+"set statusline+=%=                                      " left/right divider
+"set statusline+=\ %{&ft!=#''?&ft:'no_ft'}               " filetype
+"set statusline+=\ \|                                    " divider
+"set statusline+=\ %{&fenc?&fenc:&enc}                   " fenc=fileencoding, enc=encoding
+"set statusline+=\ \|                                    " divider
+"set statusline+=\ %{&fileformat}\                       " fileformat (dos/unix)
+"set statusline+=%#RArrow2#                              " arrow R2
+"set statusline+=                                       " arrow right
+"set statusline+=%#Right2#                               " highlight R2
+"set statusline+=\ %p%%\                                 " % of document
+"set statusline+=%#RArrow1#                              " arrow R1
+"set statusline+=                                       " arrow right
+"set statusline+=%#Right1#                               " highlight R1
+"set statusline+=\ %3l:%-2c\                             " line:col
 
-" Set Status line (old/oneline)
+" old_Set Status line
 "set statusline=\ %{HasPaste()}%F\ %m%r%h\ %Y%=Line:%l\ Col:%c\ %p%%
 
 " Status line helper functions
@@ -358,11 +372,35 @@ augroup END
 "    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 "endfunction
 
-"function! StatuslineGit()
-"    let l:branchname = GitBranch()
-"    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-"endfunction
-"
+" Run GitBranch on buffer enter/read/write, add  to branch name
+"augroup gitstatusline
+"    autocmd!
+"    autocmd BufEnter,BufRead,BufWritePost,FileChangedShell,FocusGained *
+"        \ let b:gitstl = strlen(GitBranch()) ? ' '.GitBranch().' | ' : ''
+"augroup END
+
+" get current mode
+"let g:currentmode={
+"    \ 'n'  : 'NORMAL ',
+"    \ 'v'  : 'VISUAL ',
+"    \ 'V'  : 'V·Line ',
+"    \ "\<C-V>" : 'V-Block ',
+"    \ 'i'  : 'INSERT ',
+"    \ 'R'  : 'Replace ',
+"    \ 'Rv' : 'V-Replace ',
+"    \ 'c'  : 'Command ',
+"    \}
+
+" colors for statusline
+"highlight Left1 ctermfg=0 ctermbg=6 guifg=#3B4252 guibg=#88C0D0
+"highlight Left2 ctermfg=6 ctermbg=8 guifg=#88C0D0 guibg=#4C566A
+"highlight Center1 ctermbg=0 guifg=#D8DEE9 guibg=#3B4252
+"highlight Right2 ctermfg=6 ctermbg=8 guifg=#88C0D0 guibg=#4C566A
+"highlight Right1 ctermbg=0 guifg=#D8DEE9 guibg=#3B4252
+"highlight LArrow1 ctermfg=6 ctermbg=8 guifg=#88C0D0 guibg=#4C566A
+"highlight LArrow2 ctermfg=8 ctermbg=0 guifg=#4C566A guibg=#3B4252
+"highlight RArrow2 ctermfg=8 ctermbg=0 guifg=#4C566A guibg=#3B4252
+"highlight RArrow1 ctermfg=0 ctermbg=8 guifg=#3B4252 guibg=#4C566A
 
 " }}}
 
