@@ -12,6 +12,6 @@
 	sw = switch
 	up = rebase
 	hist = log --pretty=format:'%C(auto)%h%Creset - %Cgreen%ad%Creset | %Cblue%an%Creset : %s' --graph --color=always --date=short
-	l = log --pretty=format:'%C(auto)%h%Creset - %s %Cgreen(%ad) %Cblue<%an>%C(auto)%d%Creset' --graph --color=always --date=relative
+	l = log --pretty=format:'%C(auto)%h%Creset - %s %Cgreen(%ad) %Cblue<%an>%C(auto)%d%Creset' --graph --color=always --date=relative --all
 [init]
 	defaultBranch = main
