@@ -30,6 +30,7 @@ alias h='history 100'   # show only recent history
 alias gh='history | grep -i'    # search history
 alias psg='ps -e | grep -i'     # search processes
 
+alias clear='clear -x'  # prevent clearing of scroll buffer (like ctrl-l)
 alias cls='clear'
 
 # Dotfiles git alias

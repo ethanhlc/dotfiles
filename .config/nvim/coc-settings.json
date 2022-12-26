@@ -1,0 +1,5 @@
+{
+    "inlayHint.display": false,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.messageTarget": "echo"
+}

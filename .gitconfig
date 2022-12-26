@@ -2,7 +2,7 @@
 	name = Ethan Baik
 	email = sakithree@gmail.com
 [core]
-	editor = vim
+	editor = nvim
 	excludesFile = /home/ethan/.gitignore
 [alias]
 	st = status

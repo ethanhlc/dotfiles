@@ -5,3 +5,4 @@
 
 # vlc
 alias vlc='flatpak run org.videolan.VLC'
+alias apostrophe='flatpak run org.gnome.gitlab.somas.Apostrophe'

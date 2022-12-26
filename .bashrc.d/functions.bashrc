@@ -8,3 +8,12 @@ ytdl () {
     # yt-dlp -g "$1" | vlc --quiet -
     vlc --quiet "$(yt-dlp -g "$1")"
 }
+
+# open nvim if neovim is installed
+vim () {
+    if [ -x "$(command -v nvim)" ]; then
+        nvim "$@"
+    else
+        vim "$@"
+    fi
+}

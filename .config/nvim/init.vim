@@ -1,25 +1,105 @@
-" ~/.vimrc
+" ~/.vimrc & ~/.config/nvim/init.vim
 " vimrc file created using various online sources
 " Created by: Ethan
-" Date: 2022.06.15
+" Date: 2022.12.22
+
+" PLUGINS ---------------------------------------------------------------- {{{
+
+" vim-plug
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+
+" color schemes
+Plug 'arcticicestudio/nord-vim'         " nord theme
+Plug 'dracula/vim', { 'as': 'dracula' } " dracula theme
+
+" usability
+Plug 'itchyny/lightline.vim'        " lightline statusline
+Plug 'preservim/nerdtree'           " nerdtree file browser
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocompletion
+Plug 'tpope/vim-commentary'         " easy un/comment code
+
+Plug 'christoomey/vim-tmux-navigator'   " vim / tmux ctrl navigation
+
+" git plugins
+Plug 'tpope/vim-fugitive'           " git integration
+Plug 'airblade/vim-gitgutter'       " git gutter
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+
+
+"+--- Plugin Configs ---+
+" gitgitter config
+set updatetime=100      " reduce time until gitgutter is updated
+
+" nerdtree
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" coc nvim
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" }}}
+
 
 " General ---------------------------------------------------------------- {{{
 
-" Disable compatibility with vi which can cause unexpected issues.
-set nocompatible
-
-" Set the commands to save in history.
-set history=500
-
-" Configure backspace so it acts as it should act
-set backspace=indent,eol,start
+" vim specific
+if !has('nvim')
+    " Disable compatibility with vi which can cause unexpected issues.
+    set nocompatible
+    " Set the commands to save in history.
+    set history=500
+    " Configure backspace so it acts as it should act
+    set backspace=indent,eol,start
+    " Set to auto read when a file is changed from the outside
+    set autoread
+    " au FocusGained,BufEnter * checktime
+    " No error sounds.
+    set noerrorbells
+    " Enable mouse if available.
+    if has('mouse')
+        set mouse=a
+    endif
+endif
 
 " Enable filetype detection, plugins, indent files
 filetype plugin indent on
-
-" Set to auto read when a file is changed from the outside
-set autoread
-" au FocusGained,BufEnter * checktime
 
 " don't keep backup file (files end in ~)
 set nobackup
@@ -29,17 +109,22 @@ set nobackup
 
 " User Interface & Behavior ---------------------------------------------- {{{
 
-" add theme pack
-"packadd! dracula
+" vim specific
+if !has('nvim')
+    " Turn syntax highlighting on.
+    syntax enable
+    " Always show current position
+    set ruler 
+    " Highlight search results
+    set hlsearch
+    " Makes search act like search in modern browsers
+    set incsearch
+    " Enable auto completion on commands
+    set wildmenu
+endif
 
 " Enable color scheme
 colorscheme nord
-
-" Turn syntax highlighting on.
-syntax enable
-
-" Always show current position
-set ruler
 
 " Add numbers to each line and show relative numbers.
 set number relativenumber
@@ -65,12 +150,6 @@ set wrap
 " Allow arrow keys to travel past eol
 set whichwrap+=<,>,[,]
 
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch
-
 " Ignore case when searching
 set ignorecase
 
@@ -83,9 +162,6 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set matchtime=2
 
-" Enable auto completion on commands
-set wildmenu
-
 " Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
 
@@ -93,13 +169,8 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" No error sounds.
-set noerrorbells
-
-" Enable mouse if available.
-if has('mouse')
-    set mouse=a
-endif
+" Splits open to right & bottom
+set splitright splitbelow
 
 " }}}
 
@@ -122,15 +193,6 @@ set shiftwidth=4
 
 " Auto indent
 set autoindent
-
-" }}}
-
-
-" PLUGINS ---------------------------------------------------------------- {{{
-
-" Plugin code goes here.
-" gitgitter config
-set updatetime=100      " reduce time until gitgutter is updated
 
 " }}}
 
@@ -182,10 +244,20 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Revert with ":iunmap <C-U>".
 "inoremap <C-U> <C-G>u<C-U>
 
+" Open/Close folds using <Space> key
+nnoremap <space> za
+
+" Zoom a vim pane, <C-w> to rebalance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
 " }}}
 
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
+
+" Automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 " Automatic toggling between line number modes
 augroup numbertoggle
@@ -195,7 +267,7 @@ augroup numbertoggle
 augroup END
 
 " This will enable code folding.
-" Use the marker method of folding.
+" Use the marker method of folding for vim files.
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -238,7 +310,6 @@ augroup END
 
 " If GUI version of Vim is running set these options.
 if has('gui_running')
-
     " Set the background tone.
     set background=dark
 
@@ -273,7 +344,6 @@ if has('gui_running')
         \else<Bar>
         \set guioptions+=mTr<Bar>
         \endif<CR>
-
 endif
 
 " }}}
@@ -292,7 +362,7 @@ set laststatus=2
 
 " lightline statusline config
 let g:lightline = {
-    \ 'colorscheme': 'seoul256',
+    \ 'colorscheme': 'nord',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'relativepath' ],
@@ -413,7 +483,7 @@ augroup END
 " Revert with: ":delcommand DiffOrig".
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+          \ | wincmd p | diffthis
 endif
 
 " }}}
