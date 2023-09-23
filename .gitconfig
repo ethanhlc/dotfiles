@@ -15,3 +15,11 @@
 	l = log --pretty=format:'%C(auto)%h%Creset - %s %Cgreen(%ad) %Cblue<%an>%C(auto)%d%Creset' --graph --color=always --date=relative --all
 [init]
 	defaultBranch = main
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[merge]
+	tool = meld
+[mergetool]
+	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"

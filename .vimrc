@@ -128,6 +128,23 @@ set autoindent
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
+" vim-plug
+call plug#begin()
+
+" lightline
+Plug 'itchyny/lightline.vim'
+
+" gitgutter
+Plug 'airblade/vim-gitgutter'
+
+" fugitive
+Plug 'tpope/vim-fugitive'
+
+" nerdtree
+Plug 'preservim/nerdtree'
+
+call plug#end()
+
 " Plugin code goes here.
 " gitgitter config
 set updatetime=100      " reduce time until gitgutter is updated
@@ -292,7 +309,7 @@ set laststatus=2
 
 " lightline statusline config
 let g:lightline = {
-    \ 'colorscheme': 'seoul256',
+    \ 'colorscheme': 'nord',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'relativepath' ],

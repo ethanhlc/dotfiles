@@ -5,8 +5,8 @@
 
 # pipe youtube-dlp to vlc
 ytdl () {
-    # yt-dlp -g "$1" | vlc --quiet -
-    vlc --quiet "$(yt-dlp -g "$1")"
+    yt-dlp -g "$1" | vlc --quiet -
+    # vlc --quiet "$(~/.virtualenvs/ytdlp/bin/yt-dlp -g "$1")"
 }
 
 # open nvim if neovim is installed
